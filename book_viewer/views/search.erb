@@ -1,0 +1,22 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+
+<% if params[:query] %>
+  <% if @results.empty? %>
+  <p>Sorry No Matches Found</P>
+  <% else %>
+  <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
+  <ul>
+    <% @results.each_with_index do |file, index| %>
+      <li>
+        <a href="/chapters/<%= "#{@files.index(file) + 1}##{params[:query]}" %>" class="pure-menu-link"><%= @contents[index] %></a>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
